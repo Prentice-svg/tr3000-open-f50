@@ -1,0 +1,48 @@
+name: Build TR3000 Open F50 112M
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+          sudo docker image prune --all --force
+
+      - name: Build and verify
+        env:
+          PROJECT_DIR: ${{ github.workspace }}
+          BUILD_ROOT: /root/tr3000-open-f50-build
+        run: sudo -E bash scripts/build.sh
+
+      - name: Upload verified artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: tr3000-open-f50-112m
+          path: artifacts/*
+
+      - name: Publish tagged release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            artifacts/*sysupgrade.bin
+            artifacts/*.manifest
+            artifacts/verification.txt
+            artifacts/build-versions.txt
+            artifacts/versions.lock
+            artifacts/effective.diffconfig
+            artifacts/RELEASE_SHA256SUMS
+            artifacts/SHA256SUMS
+            artifacts/profiles.json
