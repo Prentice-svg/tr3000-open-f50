@@ -16,8 +16,9 @@ This release targets only the old 128MB NAND Cudy TR3000 v1 with the
 
 - Kernel: `6.6.133`
 - Image size: `46,705,477` bytes
-- Image SHA256:
-  `18befacaff2fdd54e7589d65b4239f0695004568ed69357c7fbc98220b7d69a4`
+- Release image SHA256:
+  `50fc7debe97003546e1c4b61f82f18d684b1a1ceceb9a9c096aeeaeca0fe310f`
+- GitHub Actions build and static verification: passed
 
 ## Flash Safety
 
