@@ -44,5 +44,5 @@ jobs:
             artifacts/versions.lock
             artifacts/effective.diffconfig
             artifacts/RELEASE_SHA256SUMS
-            artifacts/SHA256SUMS
+            artifacts/ALL_SHA256SUMS
             artifacts/profiles.json

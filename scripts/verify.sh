@@ -119,7 +119,7 @@ EOF
 (
   cd "$OUT_DIR"
   sha256sum "$(basename "$IMAGE")" > RELEASE_SHA256SUMS
-  sha256sum * > SHA256SUMS
+  sha256sum * > ALL_SHA256SUMS
 )
 
 echo "Verified: $IMAGE ($size bytes)"
